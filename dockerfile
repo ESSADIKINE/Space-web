@@ -1,5 +1,5 @@
 # Use the official Node.js 18 image as a base
-FROM node:18 AS build
+FROM node:18-alpine AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 RUN npm cache clean --force
 RUN npm audit fix --force
 
