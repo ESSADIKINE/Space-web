@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  web:
+    image: azfaralam440/space-web:latest
+    ports:
+      - "2222:80"

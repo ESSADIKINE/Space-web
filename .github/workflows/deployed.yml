@@ -1,0 +1,29 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout source
+      uses: actions/checkout@v3
+   
+
+  deploy: 
+    needs: build
+    runs-on: [azfar-pro]
+    steps:
+      - name: pull image frm docker
+        run: docker pull azfaralam440/space-web:latest
+        
+      - name: run docker contaier
+        run: docker run -d -p 2222:80 --name space.life azfaralam440/space-web:latest
+        
+    
+    
