@@ -9,6 +9,9 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+RUN npm cache clean --force
+RUN npm audit fix --force
+
 
 # Copy the rest of the application
 COPY . .

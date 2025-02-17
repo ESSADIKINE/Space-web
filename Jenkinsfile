@@ -42,5 +42,11 @@ pipeline {
                 """
             }
         }
+        stage("Clean Docker System") {
+            steps {
+                echo "Cleaning up old Docker images and containers..."
+                sh "docker system prune -af || true"
+            }
+        }
     }
 }
