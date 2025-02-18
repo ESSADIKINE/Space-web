@@ -1,11 +1,9 @@
 pipeline {
     agent any
-
     environment {
         IMAGE_NAME = "space-web"
         DOCKER_HUB_REPO = "anassessadikine"
     }
-    
     stages {
         stage("Clone Repository") {
             steps {
@@ -13,14 +11,12 @@ pipeline {
                 git url: "https://github.com/ESSADIKINE/Space-web.git", branch: "main"
             }
         }
-
         stage("Build Docker Image") {
             steps {
                 echo "Building Docker image..."
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
-
         stage("Push to Docker Hub") {
             steps {
                 echo "Pushing the image to Docker Hub..."
@@ -31,7 +27,6 @@ pipeline {
                 }
             }
         }
-
         stage("Deploy Application") {
             steps {
                 echo "Deploying application using Docker Compose..."
