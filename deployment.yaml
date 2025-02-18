@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: space-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: space-web
+  template:
+    metadata:
+      labels:
+        app: space-web
+    spec:
+      containers:
+      - name: space-web
+        image: anassessadikine/space-web:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: space-web-service
+spec:
+  selector:
+    app: space-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort

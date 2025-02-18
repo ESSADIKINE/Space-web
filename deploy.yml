@@ -1,0 +1,8 @@
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Pull latest Docker image
+      command: docker pull anassessadikine/space-web:latest
+
+    - name: Restart Kubernetes Deployment
+      command: kubectl rollout restart deployment/space-web
