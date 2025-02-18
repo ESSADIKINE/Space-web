@@ -11,8 +11,7 @@ const Hero = () => {
               ORBIT THE EARTH
             </h1>
             <p data-aos="fade-up" data-aos-delay="300">
-            Earth travels around the Sun in a big circle, like a dance. It's about 149.60 million kilometers away from the Sun, and it takes about 365.256 days to complete one full circle. This path is like a stretched-out oval, but it's still really close to the Sun. So, Earth's journey around the Sun is like a graceful dance in space.
-            </p>
+            La Terre tourne autour du Soleil en suivant une trajectoire presque circulaire, semblable à une danse céleste. Située à environ 149,60 millions de kilomètres du Soleil, elle met environ 365,256 jours pour accomplir un tour complet. Bien que son orbite soit légèrement elliptique, la Terre reste toujours proche du Soleil, évoluant avec grâce à travers l'espace.            </p>
             <button
               data-aos="fade-up"
               data-aos-delay="500"
