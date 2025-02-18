@@ -15,6 +15,7 @@ spec:
       containers:
       - name: space-web
         image: anassessadikine/space-web:latest
+        imagePullPolicy: Always 
         ports:
         - containerPort: 80
 ---
