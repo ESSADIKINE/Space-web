@@ -13,28 +13,34 @@ pipeline {
         }
         stage("Build Docker Image") {
             steps {
-                script {
-                    def IMAGE_TAG = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                    env.IMAGE_TAG = IMAGE_TAG
-                }
                 echo "Building Docker image..."
-                sh "docker build -t ${DOCKER_HUB_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker build -t ${IMAGE_NAME} ."
             }
         }
         stage("Push to Docker Hub") {
             steps {
                 echo "Pushing the image to Docker Hub..."
                 withCredentials([usernamePassword(credentialsId: "dockerHub", passwordVariable: "DOCKER_PASS", usernameVariable: "DOCKER_USER")]) {
+                    sh "docker tag ${IMAGE_NAME} ${DOCKER_HUB_REPO}/${IMAGE_NAME}:latest"
                     sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
-                    sh "docker push ${DOCKER_HUB_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker push ${DOCKER_HUB_REPO}/${IMAGE_NAME}:latest"
                 }
             }
         }
-        stage("Update Kubernetes Deployment") {
+        stage("Deploy Application") {
             steps {
-                echo "Updating Kubernetes Deployment..."
-                sh "kubectl set image deployment/space-web space-web=${DOCKER_HUB_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
-                sh "kubectl rollout status deployment/space-web"
+                echo "Deploying application using Docker Compose..."
+                sh """
+                docker-compose down
+                docker-compose pull
+                docker-compose up -d
+                """
+            }
+        }
+        stage("Clean Docker System") {
+            steps {
+                echo "Cleaning up old Docker images and containers..."
+                sh "docker system prune -af || true"
             }
         }
     }
