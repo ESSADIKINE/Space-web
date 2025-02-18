@@ -43,5 +43,16 @@ pipeline {
                 sh "docker system prune -af || true"
             }
         }
+        stage("Update Kubernetes Deployment") {
+            steps {
+                echo "Updating Kubernetes Deployment..."
+                sh """
+                export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+                kubectl set image deployment/space-web space-web=anassessadikine/space-web:latest --record
+                kubectl rollout restart deployment/space-web
+                """
+    }
+}
+
     }
 }
