@@ -51,8 +51,8 @@ pipeline {
                 kubectl set image deployment/space-web space-web=anassessadikine/space-web:latest --record
                 kubectl rollout restart deployment/space-web
                 """
-    }
-}
+            }
+        }
 
     }
 }
