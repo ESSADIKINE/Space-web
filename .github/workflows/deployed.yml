@@ -8,22 +8,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
     - name: checkout source
       uses: actions/checkout@v3
-   
 
-  deploy: 
+  deploy:
     needs: build
-    runs-on: [azfar-pro]
+    runs-on: ubuntu-latest
     steps:
-      - name: pull image frm docker
+      - name: pull image from docker
         run: docker pull azfaralam440/space-web:latest
-        
-      - name: run docker contaier
+
+      - name: run docker container
         run: docker run -d -p 2222:80 --name space.life azfaralam440/space-web:latest
-        
-    
-    
