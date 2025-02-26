@@ -8,7 +8,7 @@ const Hero = () => {
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="text-white space-y-4 lg:pr-36">
             <h1 data-aos="fade-up" className="text-5xl font-bold">
-              ORBIT THE EARTH
+              ORBIT THE EARTH 
             </h1>
             <p data-aos="fade-up" data-aos-delay="300">
             La Terre tourne autour du Soleil en suivant une trajectoire presque circulaire, semblable à une danse céleste. Située à environ 149,60 millions de kilomètres du Soleil, elle met environ 365,256 jours pour accomplir un tour complet. Bien que son orbite soit légèrement elliptique, la Terre reste toujours proche du Soleil, évoluant avec grâce à travers l'espace.            </p>
